@@ -1,0 +1,25 @@
+[project]
+name = "small-object-detection"
+version = "0.1.dev1"
+description = "Small Object Detection Benchmark"
+readme = "README.md"  
+# Homepage = "https://egemenerbayat.com/"
+# Repository = "https://github.com/erbayat/small-object-detection"
+license = { file = "LICENSE" }
+authors = [
+    {name = "Egemen Erbayat", email = "erbayat@gwu.edu"}
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: Free for non-commercial use",
+    "Operating System :: OS Independent",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+
+
+[project.scripts]
+run_env = "trainer:cmd_train"
+run_inference = "runner:cmd_inference"
