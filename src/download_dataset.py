@@ -5,7 +5,7 @@ import zipfile
 import gdown
 
 # Define the directory to save models
-MODEL_DIR = "../dataset/"
+MODEL_DIR = "./dataset/"
 os.makedirs(MODEL_DIR, exist_ok=True)
 
 def download_from_google_drive(url, output_path):

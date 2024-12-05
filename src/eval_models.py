@@ -9,16 +9,16 @@ from sahi.utils.cv import read_image
 from sahi.utils.file import download_from_url
 from sahi.predict import get_prediction, get_sliced_prediction, predict
 
-MAIN_DIR = "../"
+MAIN_DIR = "./"
 warmup = True
 
 # Function to parse arguments
 def parse_arguments():
     parser = argparse.ArgumentParser(description="YOLO model inference on VisDrone dataset.")
     parser.add_argument("--model_name", type=str, default="yolo11n", help="Name of the YOLO model to use (default: yolo11n)")
-    parser.add_argument("--dataset_path", type=str, default=r"..\dataset\VisDrone2019-VID-test-dev\sequences\\", help="Path to the dataset folder")
+    parser.add_argument("--dataset_path", type=str, default=r"./dataset/VisDrone2019-VID-test-dev/sequences/", help="Path to the dataset folder")
     parser.add_argument("--num_experiments", type=int, default=5, help="Number of experimental runs to perform (default: 5)")
-    parser.add_argument("--warmup_runs", type=int, default=2, help="Number of warmup runs (default: 2)")
+    parser.add_argument("--warmup_runs", type=int, default=1, help="Number of warmup runs (default: 1)")
     parser.add_argument("--is_sahi", type=bool, default=False, help="Whether to use SAHI (default: False)")
 
     return parser.parse_args()
@@ -40,7 +40,7 @@ def run_model(model, image_path, is_sahi):
     if not is_sahi:
         return model(image_path, verbose=False)  # Run inference
     else:
-        return get_prediction(str(image_path), model)
+        return get_sliced_prediction(str(image_path), model, slice_height = 512, slice_width = 512, overlap_height_ratio = 0.2, overlap_width_ratio = 0.2, verbose = 0)
 
 def add_results_to_list(results, results_list, experiment, category_to_numeric, frame_index ,is_sahi = True):
     if not is_sahi:
@@ -123,10 +123,10 @@ def process_dataset_folder(model, dataset_folder, category_to_numeric, output_pa
 
 if __name__ == "__main__":
     args = parse_arguments()
-
+    print(args)
     model_name = args.model_name
     dataset_path = Path(args.dataset_path)
-    output_base_path = Path("../results/")
+    output_base_path = Path("./results/")
     num_experiments = args.num_experiments
     warmup_runs = args.warmup_runs
     is_sahi = args.is_sahi
@@ -137,10 +137,10 @@ if __name__ == "__main__":
         model_output_folder = model_name
 
     # Load model and class conversions
+    yolo_model_path = f"./models/{model_name}.pt"
     if not is_sahi:
-        model = YOLO(model_name + ".pt")
+        model = YOLO(yolo_model_path)
     else:
-        yolo_model_path = f"../models/{model_name}.pt"
         model = AutoDetectionModel.from_pretrained(
             model_type='yolo11',
             model_path=yolo_model_path,

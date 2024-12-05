@@ -3,7 +3,7 @@ from ultralytics import YOLO
 import argparse
 
 
-MAIN_DIR = "../"
+MAIN_DIR = "./"
 
 # Train the model
 def train_yolo_model(model_name, data, epochs, imgsz, suffix, batch):

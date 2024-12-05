@@ -4,7 +4,7 @@ import zipfile
 import gdown
 
 # Define the directory to save models
-MODEL_DIR = "../models/"
+MODEL_DIR = "./models/"
 os.makedirs(MODEL_DIR, exist_ok=True)
 
 def download_from_google_drive(url, output_path):
@@ -32,7 +32,7 @@ def download_extract_delete_zip_from_gdrive(file_id, output_folder, check_files)
     
     # Download the file
     zip_path = "downloaded_models.zip"
-    print("Downloading models...")
+    print("Downloading finetuned models...")
     download_from_google_drive(file_id, zip_path)
 
     # Extract the file
@@ -72,6 +72,7 @@ def install_yolo_model(model_name):
 url = 'https://drive.google.com/file/d/1eUld322Qv5SohOebyEK_Ql864vKPAZwF/view?usp=sharing'
 
 # Install YOLO models
+print("Downloading base models...")
 install_yolo_model('yolo11n')
 install_yolo_model('yolo11s')
 install_yolo_model('yolo11m')
