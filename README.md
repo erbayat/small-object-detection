@@ -1,9 +1,5 @@
 # Small Object Detection Comparative Study
 
-## Contents
-
-- [Small Object Detection Comparative Study](#small-object-detection-comparative-study)
-  - [Contents](#contents)
   - [Overview](#overview)
   - [Objectives](#objectives)
   - [Datasets](#datasets)
@@ -17,6 +13,7 @@
   - [Run Experiments](#run-experiments)
   - [Latency Results](#latency-results)
   - [Accuracy Results](#accuracy-results)
+  - [Example Detections](#example-detections)
   - [References](#references)
   - [Contact](#contact)
     
@@ -112,6 +109,13 @@ python3 ./src/eval_models.py --model_name selected_model_name_here --is_sahi Tru
 
 
 ## Latency Results
+
+<p align="center">
+    <img src="figures/latency.png" alt="Latency Results" style="width:40%;">
+</p>
+
+<center>
+
 | Method             |   Average Latency (ms) |   Standard Deviation (ms) |
 |:----------------------|-----------------------:|--------------------------:|
 | Yolo11n-B               |                   28   |                      10.5 |
@@ -134,14 +138,22 @@ python3 ./src/eval_models.py --model_name selected_model_name_here --is_sahi Tru
 | Yolo11x-FT              |                   44.2 |                      10.7 |
 | Yolo11x-B++             |                  466.1 |                     208.5 |
 | Yolo11x-FT++            |                  481.3 |                     208.4 |
+</center>
 
 - **-B**: Pretrained weights.
 - **-FT**: Fine-tuned with the Visdrone dataset.
 - **++**: SAHI (Sliced Aided Hyper Inference) approach is applied.
 
 > **Note:** All latency results were obtained using an RTX 2070 Ti GPU.
-> 
+
 ## Accuracy Results
+<p align="center">
+    <img src="figures/ap50-95.png" alt="AP.50-.95 Results" style="width:40%;">
+    <img src="figures/ar10.png" alt="AR-10 Results" style="width:40%;">
+</p>
+
+<center>
+
 | Method             | AP(.50-.95)-500 | AP(.50)-500 | AP(.75)-500 | AR(.50-.95)-1 | AR(.50-.95)-10 | AR(.50-.95)-100 | AR(.50-.95)-500 |
 |:----------------------|----------------:|------------:|------------:|--------------:|---------------:|----------------:|----------------:|
 | Yolo11n-B               |            4.27 |        8.16 |        3.98 |          1.64 |           5.65 |            6.41 |            6.41 |
@@ -164,10 +176,16 @@ python3 ./src/eval_models.py --model_name selected_model_name_here --is_sahi Tru
 | Yolo11x-FT              |           21.90 |       44.78 |       18.30 |          9.54 |          24.13 |           30.20 |           30.20 |
 | Yolo11x-B++             |           10.78 |       21.06 |        9.57 |          4.33 |          12.57 |           16.16 |           16.16 |
 | Yolo11x-FT++            |           21.89 |       45.71 |       18.31 |          9.83 |          25.83 |           32.67 |           32.70 |
+</center>
 
 - **-B**: Pretrained weights.
 - **-FT**: Fine-tuned with the Visdrone dataset.
 - **++**: SAHI (Sliced Aided Hyper Inference) approach is applied.
+
+## Example Detections
+<p align="center">
+    <img src="figures/example_detections.png" alt="Example Detections" style="width:70%;">
+</p>
 
 ## References
 - [SAHI: Slicing Aided Hyper Inference](https://github.com/obss/sahi)
