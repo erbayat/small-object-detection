@@ -109,7 +109,7 @@ if __name__ == "__main__":
     labels = [f"{model_name}".capitalize()+'-B', f"{model_name}".capitalize()+'-FT', f"{model_name}".capitalize()+'-B++', f"{model_name}".capitalize()+'-FT++']
 
     # Colors for each model's bounding boxes
-    colors = ['red', 'blue', 'green', 'purple']
+    colors = ['white', 'white', 'white', 'white']
 
     # Call the function to plot
     plot_yolo_results_separately_with_classes(image_path, model_results, labels, colors)
